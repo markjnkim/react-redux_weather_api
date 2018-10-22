@@ -1,19 +1,38 @@
-import axios from 'axios';
-const API_KEY = '51120a1852d3bb845834ebad87c9648e';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchWeather } from '../actions/index';
 
-const ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
+export default class SearchBar extends Component {
+  constructor(props) {
+    super(props);
 
-export const FETCH_WEATHER = 'FETCH_WEATHER';
+    this.state = { term: '' };
+    this.onInputChange = this.onInputChange.bind(this)
+    this.onFormSubmit = this.onFormSubmit.bind(this)
+  }
 
-export function fetchWeather(city) {
-  const url = `${ROOT_URL}&q=${city},us`;
-  const request = axios.get(url);
+  onInputChange(event) {
+    this.setState({ term: event.target.value });
+  }
 
-  console.log('Request: ', request);
+  onFormSubmit(event) {
+    event.preventDefault()
+    // fetch weather
+  }
 
-
-  return {
-    type: FETCH_WEATHER,
-    payload: request
-  };
+  render() {
+    return (
+      <form onSubmit={this.onFormSubmit} className="input-group">
+        <input 
+          placeholder="Get a 5 day forecast in your city"
+          className="form-control"
+          value={this.state.term}
+          onChange={this.onInputChange} />
+        <span className="input-group-btn">
+          <button type="submit" className="btn btn-secondary">Submit</button>
+        </span>
+      </form>
+    );
+  }
 }
