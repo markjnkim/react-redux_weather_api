@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import axios from 'axios';
 const API_KEY = '51120a1852d3bb845834ebad87c9648e';
 
@@ -17,3 +18,6 @@ export function fetchWeather(city) {
     payload: request
   };
 }
+=======
+const api_key = process.env.API_KEY;
+>>>>>>> da993f6479b1ab4cfaebd362869e937696af6b52
